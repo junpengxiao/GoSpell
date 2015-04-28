@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"></meta>
+        <link href="../stylesheets/jshaw.css" rel="stylesheet"></link>
+        <link href="../stylesheets/favicon.ico" rel="icon" type="image/x-icon"></link>
+        <script src="../stylesheets/jshaw.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <ul>
+                    <li class="lastItem"><a href="about.asp">About</a></li>
+                    <li><a href="contact.asp">Publication</a></li>
+                    <li><a href="news.asp">Project</a></li>
+                    <li class="firstItem"><a href="default.asp">Home</a></li>
+                </ul>
+            </div>
+            <article>
+                <h1>Pipelines</h1>
+                <p>A pipeline may be "chained" by separating a sequence of commands with pipeline characters '|'. In a chained pipeline, the result of the each command is passed as the last argument of the following command. The output of the final command in the pipeline is the value of the pipeline.
+                </p>
+                <p>The output of a command will be either one value or two values, the second of which has type error. If that second value is present and evaluates to non-nil, execution terminates and the error is returned to the caller of Execute.
+                </p>
+            </article>
+        </div>
+    </body>
+</html>

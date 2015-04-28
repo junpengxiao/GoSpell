@@ -1,0 +1,91 @@
+{{define "Front"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"></meta>
+        <link href="/stylesheets/jshaw.css" rel="stylesheet"></link>
+        <link href="/stylesheets/favicon.ico" rel="icon" type="image/x-icon"></link>
+        <script src="/stylesheets/jshaw.js"></script>
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });
+        </script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/styles/github.min.css"></link>
+        <script src="/stylesheets/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <ul>
+                    {{if eq . 2}}
+                    <li class="lastItem selected"><a href="/resume">Résumé</a></li>
+                    {{else}}
+                    <li class="lastItem"><a href="/resume">Résumé</a></li>
+                    {{end}}
+                    {{if eq . 1}}
+                    <li class="selected"><a href="/project">Project</a></li>
+                    {{else}}
+                    <li><a href="/project">Project</a></li>
+                    {{end}}
+                    {{if eq . 0}}
+                    <li class="firstItem selected"><a href="/home">Home</a></li>
+                    {{else}}
+                    <li class="firstItem"><a href="/home">Home</a></li>
+                    {{end}}
+                </ul>
+            </div>
+{{end}}
+
+{{define "Tail"}}
+        </div>
+    </body>
+</html>
+{{end}}
+
+{{define "ArticleList"}}
+<div class="artlist">
+    <dl>
+        {{range $index, $element := .Contents}}
+        {{if eq $index 0}}
+        <dt class="firstItem"><a href="article?key={{$element.Key}}">{{$element.Title}}</a></dt>
+        {{else}}
+        <dt><a href="article?key={{$element.Key}}">{{$element.Title}}</a></dt>
+        {{end}}
+        <dd>{{.Content}}</dd>
+        {{end}}
+    </dl>
+</div>
+{{end}}
+
+{{define "ArticleContent"}}
+<article>
+    {{.Content}}
+</article>
+{{end}}
+
+{{define "UploadContent"}}
+<form action="/admin/uploadit?key={{.}}" method="post">
+    <input type="text" name="title" placeholder="Title" required autofocus style="width:100%;font-size:22px;"></textarea>
+    <textarea name="content" placeholder="Contents" required style="width:796px;font-size:18px;" rows="21s"></textarea>
+    <input type="submit" value="Submit"/>
+</form>
+{{end}}
+
+{{define "HomePage"}}
+{{template "Front" .Selected}}
+{{template "ArticleList" .}}
+{{template "Tail"}}
+{{end}}
+
+{{define "Article"}}
+{{template "Front" 4}}
+{{template "ArticleContent" .}}
+{{template "Tail"}}
+{{end}}
+
+{{define "Upload"}}
+{{template "Front" 4}}
+{{template "UploadContent"}}
+{{template "Tail"}}
+{{end}}

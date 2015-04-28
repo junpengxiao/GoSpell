@@ -1,0 +1,63 @@
+{{define "Front"}}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"></meta>
+        <link href="./stylesheets/jshaw.css" rel="stylesheet"></link>
+        <link href="./stylesheets/favicon.ico" rel="icon" type="image/x-icon"></link>
+        <script src="./stylesheets/jshaw.js"></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar">
+                <ul>
+                    {{if eq .Selected 3}}
+                    <li class="lastItem selected"><a href="resume">Résumé</a></li>
+                    {{else}}
+                    <li class="lastItem"><a href="resume">Résumé</a></li>
+                    {{end}}
+                    {{if eq .Selected 2}}
+                    <li class="selected"><a href="publication">Publication</a></li>
+                    {{else}}
+                    <li><a href="publication">Publication</a></li>
+                    {{end}}
+                    {{if eq .Selected 1}}
+                    <li class="selected"><a href="project">Project</a></li>
+                    {{else}}
+                    <li><a href="project">Project</a></li>
+                    {{end}}
+                    {{if eq .Selected 0}}
+                    <li class="firstItem selected"><a href="home">Home</a></li>
+                    {{else}}
+                    <li class="firstItem"><a href="home">Home</a></li>
+                    {{end}}
+                </ul>
+            </div>
+{{end}}
+
+{{define "Tail"}}"
+        </div>
+    </body>
+</html>
+{{end}}
+
+{{define "ArticleList"}}
+<div class="artlist">
+    <dl>
+        {{range $index, $element := .Contents}}
+        {{if eq $index 0}}
+        <dt class="firstItem"><a href="article?key={{$element.Key}}&rawkey={{$element.RawKey}}">{{$element.Title}}</a></dt>
+        {{else}}
+        <dt><a href="article?key={{$element.Key}}&rawkey={{$element.RawKey}}">{{$element.Title}}</a></dt>
+        {{end}}
+        <dd>{{.Abstract}}</dd>
+        {{end}}
+    </dl>
+</div>
+{{end}}
+
+{{define "HomePage"}}
+{{template "Front"}}
+{{template "ArticleList"}}
+{{template "Tail"}}
+{{end}}
